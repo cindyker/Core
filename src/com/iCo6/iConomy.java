@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.util.Locale;
 
-import com.nijikokun.bukkit.Permissions.Permissions;
+//import com.nijikokun.bukkit.Permissions.Permissions;
 
 import com.iCo6.Constants.Drivers;
 import com.iCo6.command.Handler;
@@ -39,7 +39,7 @@ import java.util.Timer;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.CraftServer;
+//import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.Plugin;
@@ -75,7 +75,7 @@ public class iConomy extends JavaPlugin {
 
     private static Accounts Accounts = new Accounts();
     public Parser Commands = new Parser();
-    public Permissions Permissions;
+    //public Permissions Permissions;
     private boolean testedPermissions = false;
 
     public static boolean TerminalSupport = false;
@@ -98,9 +98,10 @@ public class iConomy extends JavaPlugin {
             // Server & Terminal Support
             Server = getServer();
 
-            if(getServer().getServerName().equalsIgnoreCase("craftbukkit")) {
-                TerminalSupport = ((CraftServer)getServer()).getReader().getTerminal().isANSISupported();
-            }
+
+//            if(getServer().getServerName().equalsIgnoreCase("craftbukkit")) {
+//                TerminalSupport = getServer().getReader().getTerminal().isANSISupported();
+//            }
 
             // Get general plugin information
             info = getDescription();
@@ -435,26 +436,6 @@ public class iConomy extends JavaPlugin {
                 if(node == null)
                     return true;
 
-                if(this.Permissions == null)
-                    if(!this.testedPermissions) {
-                        Plugin Perms = Server.getPluginManager().getPlugin("Permissions");
-                        
-                        if (Perms != null) {
-                            if (Perms.isEnabled()) {
-                                this.Permissions = ((Permissions)Perms);
-                                System.out.println("[iConomy] hooked into Permissions.");
-                            }
-                        }
-
-                        this.testedPermissions = true;
-                    }
-                
-                if(this.Permissions != null) {
-                    if(Permissions.Security.permission(player, node) || Permissions.Security.permission(player, node.toLowerCase()))
-                        return true;
-
-                    return false;
-                } else {
                     try {
                         Permission perm = new Permission(node);
                         if(player.hasPermission(perm) || player.hasPermission(node) || player.hasPermission(node.toLowerCase()))
@@ -464,7 +445,7 @@ public class iConomy extends JavaPlugin {
                     } catch(Exception e) {
                         return player.isOp();
                     }
-                }
+
             }
         }
 

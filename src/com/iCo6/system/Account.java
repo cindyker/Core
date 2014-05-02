@@ -8,6 +8,10 @@ import org.bukkit.entity.Player;
 
 public class Account {
     public String name;
+    public String uuid;
+
+    public Account(boolean UseUUID, String uuid)
+    { this.uuid = uuid; }
 
     public Account(String name) {
         this.name = name;

@@ -29,6 +29,13 @@ public class Accounts {
         return create(name, balance, 0);
     }
 
+    public boolean create(String uuid, String name, Double balance, boolean use_uuid) {
+        if(!Queried.hasAccount(name))
+            return Queried.createAccount(name, balance, status);
+
+    }
+
+
     public boolean create(String name, Double balance, Integer status) {
         if(!Queried.hasAccount(name))
             return Queried.createAccount(name, balance, status);
