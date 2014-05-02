@@ -204,7 +204,15 @@ public class Queried {
         return finals;
     }
 
-    static boolean createAccount(String name, Double balance, Integer status) {
+    static boolean verifyAccount(String uuid, String name)
+    {
+        //This Function will make sure on login that the player's name is still the same.
+        //and will update the SQL table if its different.
+        // If another player has their new name, it will replace that players name with Name_U
+        return true;
+    }
+
+    static boolean createAccount(String uuid, String name, Double balance, Integer status) {
         Boolean created = false;
 
         if(useMiniDB() || useInventoryDB() || useOrbDB()) {
@@ -235,12 +243,12 @@ public class Queried {
 
             try{
                 String t = Constants.Nodes.DatabaseTable.toString();
-                Integer amount = run.update(c, "INSERT INTO " + t + "(username, balance, status) values (?, ?, ?)", name.toLowerCase(), balance, status);
+                Integer amount = run.update(c, "INSERT INTO " + t + "(uuid, username, balance, status) values (?, ?, ?, ?)", uuid, name.toLowerCase(), balance, status);
 
                 if(amount > 0)
                     created = true;
             } catch (SQLException ex) {
-                System.out.println("[iConomy] Error issueing SQL query: " + ex);
+                System.out.println("[iConomy] Error issuing SQL query: " + ex);
             } finally {
                 DbUtils.close(c);
             }
@@ -251,7 +259,7 @@ public class Queried {
         return false;
     }
 
-    static boolean removeAccount(String name) {
+    static boolean removeAccount(String uuid, String name) {
         Boolean removed = false;
 
         if(useMiniDB() || useInventoryDB() || useOrbDB()) {

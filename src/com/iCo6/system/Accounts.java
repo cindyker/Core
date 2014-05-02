@@ -30,8 +30,8 @@ public class Accounts {
     }
 
     public boolean create(String uuid, String name, Double balance, boolean use_uuid) {
-        if(!Queried.hasAccount(name))
-            return Queried.createAccount(name, balance, status);
+        if(!Queried.hasAccount(uuid,name))
+            return Queried.createAccount(uuid, name, balance, status);
 
     }
 
